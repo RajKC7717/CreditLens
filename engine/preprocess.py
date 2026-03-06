@@ -44,7 +44,7 @@ def load_and_preprocess(filepath):
 
 # ← ADD THIS BLOCK at the bottom to test
 if __name__ == "__main__":
-    X, y, scaler = load_and_preprocess('data/sample_profiles.csv')
+    X, y, scaler = load_and_preprocess('Data/sample_profiles.csv')
     print("✅ Shape of X:", X.shape)
     print("✅ Target distribution:\n", y.value_counts())
     print("✅ First row of features:\n", X.iloc[0])
