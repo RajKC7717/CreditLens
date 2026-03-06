@@ -7,7 +7,8 @@ def load_and_preprocess(filepath):
     
     cols_needed = [
         'SK_ID_CURR', 'TARGET', 'AMT_INCOME_TOTAL',
-        'AMT_CREDIT', 'AMT_GOODS_PRICE', 'CNT_FAM_MEMBERS'
+        'AMT_CREDIT', 'AMT_GOODS_PRICE', 'CNT_FAM_MEMBERS',
+        'EXT_SOURCE_2', 'EXT_SOURCE_3'  # ← adding these two
     ]
     df = df[cols_needed]
     df = df.dropna()
@@ -15,6 +16,7 @@ def load_and_preprocess(filepath):
     df['monthly_inflow_avg'] = df['AMT_INCOME_TOTAL']
     df['inflow_transaction_count'] = df['CNT_FAM_MEMBERS']
     df['essential_spend_ratio'] = df['AMT_GOODS_PRICE'] / (df['AMT_CREDIT'] + 1)
+    df['external_score_avg'] = (df['EXT_SOURCE_2'] + df['EXT_SOURCE_3']) / 2  # ← new
     
     np.random.seed(42)
     df['p2p_vs_p2m_ratio'] = np.random.uniform(0.1, 0.9, len(df))
@@ -26,10 +28,10 @@ def load_and_preprocess(filepath):
     
     feature_cols = [
         'monthly_inflow_avg', 'inflow_transaction_count',
-        'essential_spend_ratio', 'p2p_vs_p2m_ratio',
-        'ecommerce_cod_ratio', 'recharge_gap_variance',
-        'ecommerce_return_rate', 'utility_avg_days_late',
-        'utility_missed_count'
+        'essential_spend_ratio', 'external_score_avg',  # ← replaced one signal
+        'p2p_vs_p2m_ratio', 'ecommerce_cod_ratio',
+        'recharge_gap_variance', 'ecommerce_return_rate',
+        'utility_avg_days_late', 'utility_missed_count'
     ]
     
     X = df[feature_cols]
