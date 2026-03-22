@@ -219,4 +219,72 @@ else:
         for i, (label, val) in enumerate(signals):
             signal_cols[i].metric(label, val)
 
+
+        st.markdown("---")
+        
+        # ─── What If Simulator ──────────────────────────────
+        st.markdown("### 🔮 What-If Simulator")
+        st.markdown("*Adjust the sliders below to see how behavior changes affect the score in real time*")
+
+        sim_col1, sim_col2, sim_col3 = st.columns(3)
+        
+        with sim_col1:
+            sim_bills_late = st.slider(
+                "📅 If utility bills paid on time (days late)",
+                -10.0, 30.0, float(days_late), 0.5,
+                key="sim_bills"
+            )
+        with sim_col2:
+            sim_missed = st.slider(
+                "🧾 If missed bills reduced to",
+                0, 10, int(missed_bills), 1,
+                key="sim_missed"
+            )
+        with sim_col3:
+            sim_cod = st.slider(
+                "📦 If COD usage reduced to",
+                0.0, 1.0, float(cod_ratio), 0.05,
+                key="sim_cod"
+            )
+
+        # Build simulated profile with changed values
+        simulated_profile = profile.copy()
+        simulated_profile["utility_avg_days_late"] = sim_bills_late
+        simulated_profile["utility_missed_count"] = sim_missed
+        simulated_profile["ecommerce_cod_ratio"] = sim_cod
+
+        sim_result = predict_score(simulated_profile)
+        sim_score = sim_result["credit_score"]
+        score_diff = sim_score - score
+
+        # Show simulated score
+        sim_col_a, sim_col_b, sim_col_c = st.columns(3)
+        with sim_col_a:
+            st.metric("Current Score", f"{score} / 100")
+        with sim_col_b:
+            arrow = "🟢" if score_diff > 0 else "🔴" if score_diff < 0 else "⚪"
+            st.metric("Simulated Score", f"{sim_score} / 100", 
+                     delta=f"{score_diff:+d} points")
+        with sim_col_c:
+            st.metric("New Risk Category", sim_result["risk_category"])
+
+        # Simulated score bar
+        sim_bar_color = "#2ecc71" if sim_result["risk_color"] == "green" else "#e67e22" if sim_result["risk_color"] == "orange" else "#e74c3c"
+        st.markdown(f"""
+        <div style='background:#eee; border-radius:10px; height:24px; margin:10px 0'>
+            <div style='background:{sim_bar_color}; width:{sim_score}%; height:24px; 
+                border-radius:10px; display:flex; align-items:center; 
+                padding-left:10px; color:white; font-weight:bold; font-size:13px'>
+                {sim_score}/100
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        if score_diff > 0:
+            st.success(f"✅ If {customer_name} makes these behavioral changes, their score improves by **{score_diff} points** — potentially moving to {sim_result['risk_category']}.")
+        elif score_diff < 0:
+            st.error(f"⚠️ These changes would decrease the score by {abs(score_diff)} points.")
+        else:
+            st.info("No change in score with these adjustments.")
+
         
