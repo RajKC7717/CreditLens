@@ -80,7 +80,7 @@ One sentence confirming this score is based purely on financial behavior, not de
 
 
 if __name__ == "__main__":
-    from engine.predict import predict_score
+    from predict import predict_score
 
     profile = {
         'monthly_inflow_avg': 12000,

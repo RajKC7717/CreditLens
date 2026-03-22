@@ -51,7 +51,7 @@ def train_and_save(filepath, model_output_path, scaler_output_path):
 
 if __name__ == "__main__":
     train_and_save(
-        filepath='Data/sample_profiles.csv',
-        model_output_path='models/risk_model.pkl',
-        scaler_output_path='models/scaler.pkl'
+        filepath='../Data/sample_profiles.csv',
+        model_output_path='../models/risk_model.pkl',
+        scaler_output_path='../models/scaler.pkl'
     )
