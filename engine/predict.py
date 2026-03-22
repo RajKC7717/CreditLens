@@ -42,7 +42,7 @@ def predict_score(profile: dict) -> dict:
     
     return {
         "credit_score": credit_score,
-        "default_probability": round(default_prob * 100, 1),
+        "default_probability": round(default_prob * 100, 0),
         "risk_category": risk,
         "risk_color": risk_color,
         "profile": profile
