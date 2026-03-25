@@ -11,7 +11,8 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://localhost:5173", "http://localhost:3000", "*"],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -33,14 +34,14 @@ class ExplainRequest(BaseModel):
     customer_name: str
     prediction_result: dict
 
-@app.post("/predict")
+@app.post("/api/predict")
 def predict(req: PredictRequest):
     profile = req.dict()
     profile.pop("customer_name")
     result = predict_score(profile)
     return result
 
-@app.post("/explain")
+@app.post("/api/explain")
 def explain(req: ExplainRequest):
     explanation = generate_explanation(
         req.prediction_result,
@@ -48,7 +49,7 @@ def explain(req: ExplainRequest):
     )
     return explanation
 
-@app.get("/health")
+@app.get("/api/health")
 def health():
     return {"status": "ok"}
 

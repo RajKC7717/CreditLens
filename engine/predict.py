@@ -41,10 +41,10 @@ def predict_score(profile: dict) -> dict:
         risk_color = "red"
     
     return {
-        "credit_score": credit_score,
-        "default_probability": round(default_prob * 100, 0),
-        "risk_category": risk,
-        "risk_color": risk_color,
+        "credit_score": int(credit_score),
+        "default_probability": float(round(default_prob * 100, 1)),
+        "risk_category": str(risk),
+        "risk_color": str(risk_color),
         "profile": profile
     }
 
