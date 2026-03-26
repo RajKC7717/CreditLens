@@ -1,7 +1,7 @@
 import axios from 'axios';
 import type { PredictRequest, PredictResponse, ExplainRequest, ExplainResponse } from '../types/credit';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8501';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 const api = axios.create({
   baseURL: API_BASE,
