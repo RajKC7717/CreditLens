@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
-  ArrowRight,
   Brain,
   Smartphone,
   Receipt,
@@ -22,120 +21,123 @@ import Navbar from '../components/Navbar';
 gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
-  { value: 650, suffix: 'M+', label: 'Credit-Invisible Clients' },
-  { value: 10, suffix: '', label: 'Behavioral Metrics Tracked' },
-  { value: 100, suffix: '%', label: 'Compliance Audit Coverage' },
-  { value: 3, suffix: 's', label: 'Institutional Scoring Latency' },
+  { value: 650, suffix: 'M+', label: 'Credit-Invisible Profiles' },
+  { value: 10, suffix: '', label: 'Telemetry Vectors Analyzed' },
+  { value: 100, suffix: '%', label: 'Regulatory Auditing' },
+  { value: 3, suffix: 's', label: 'Average Processing Time' },
 ];
 
 const signals = [
   {
-    icon: <Smartphone size={18} />,
+    icon: <Smartphone size={16} />,
     title: 'UPI Payment Telemetry',
-    desc: 'Monitors transaction velocity, peer-to-peer ratios, and spending consistency to evaluate implicit income stability.',
-    metric: 'P2P vs Merchant',
+    desc: 'Analyzes transaction velocity, peer-to-peer ratios, and consistency to determine implicit income.',
   },
   {
-    icon: <Receipt size={18} />,
-    title: 'Obligation Fulfillment',
-    desc: 'Measures utility bill punctuality. Delinquency windows directly correlate with financial discipline and risk capacity.',
-    metric: 'Delinquency Variance',
+    icon: <Receipt size={16} />,
+    title: 'Obligation Metrics',
+    desc: 'Tracks utility bill payments; delinquency window variation correlates with financial capacity.',
   },
   {
-    icon: <ShoppingCart size={18} />,
+    icon: <ShoppingCart size={16} />,
     title: 'Discretionary Output',
-    desc: 'Analyzes the ratio of essential spend against delivery and return patterns to gauge consumer financial maturity.',
-    metric: 'Essential Ratio',
+    desc: 'Ratio of essential spend against retail and return rates to gauge financial maturity.',
   },
   {
-    icon: <Radio size={18} />,
+    icon: <Radio size={16} />,
     title: 'Telecon Stability',
-    desc: 'Evaluates recurring prepaid recharge rhythm. Consistency indicates stable employment and procedural adherence.',
-    metric: 'Recharge Rhythm',
+    desc: 'Recurring prepaid rhythm indicates stable employment and adherence to procedures.',
   },
 ];
 
 const features = [
   {
-    icon: <Brain size={20} />,
-    title: 'Gradient Boosting Architecture',
-    desc: 'Production-grade XGBoost models trained on extensive behavioral telemetries. Generates institutional-grade risk probabilities specifically engineered for thin-file populations.',
-    badge: 'Machine Learning',
+    icon: <Brain size={18} />,
+    title: 'XGBoost Architecture',
+    desc: 'Production-grade models trained on behavioral data for populations lacking formal bureau histories.',
   },
   {
-    icon: <Lock size={20} />,
-    title: 'Federated Data Security',
-    desc: 'Designed for strict data sovereignty. Raw telemetry remains localized within source institutions, with only abstracted model weights updating the central ledger.',
-    badge: 'Regulatory Compliance',
+    icon: <Lock size={18} />,
+    title: 'Federated Security',
+    desc: 'Strict data sovereignty ensuring raw client telemetries remain localized within host institutions.',
   },
   {
-    icon: <BarChart3 size={20} />,
-    title: 'Algorithmic Transparency',
-    desc: 'Neural assessments output detailed, human-readable rationales. Loan officers receive deterministic reasoning for every probabilistic score to ensure regulatory defensibility.',
-    badge: 'Explainability',
+    icon: <BarChart3 size={18} />,
+    title: 'Transparent Outcomes',
+    desc: 'Neural assessments output detailed readable rationales, ensuring rigorous regulatory defensibility.',
   },
   {
-    icon: <FileCheck2 size={20} />,
-    title: 'Institutional Fairness Audit',
-    desc: 'Built-in systematic auditing prevents disparate impact across protected classes. Every credit decision is screened through comprehensive bias mitigation pipelines.',
-    badge: 'Ethical Architecture',
+    icon: <FileCheck2 size={18} />,
+    title: 'Systematic Fairness',
+    desc: 'Built-in auditing pipelines neutralize disparate impact risks across protected socio-economic classes.',
   },
-];
-
-const steps = [
-  { num: 'I', title: 'Data Ingestion', desc: 'Securely import 10 essential behavioral signals via the portal or automated API gateway.' },
-  { num: 'II', title: 'Model Evaluation', desc: 'XGBoost engine processes telemetry to compute the core risk score and default probability in milliseconds.' },
-  { num: 'III', title: 'Rationale Synthesis', desc: 'Generative AI synthesizes the raw model outputs into a structured, compliance-ready narrative.' },
-  { num: 'IV', title: 'Executive Decision', desc: 'Underwriters execute the final loan allocation informed by empirical guidance and algorithmic transparency.' },
 ];
 
 const targetUsers = [
-  { icon: <Landmark size={20} />, title: 'Private Banks', desc: 'Safely originate credit for emerging affluent individuals lacking traditional bureau depth.' },
-  { icon: <Building2 size={20} />, title: 'NBFC Analytics', desc: 'Deploy precise alternative parameters to underwrite micro-entrepreneurs and gig-economy participants.' },
-  { icon: <Briefcase size={20} />, title: 'Fintech Sponsors', desc: 'Integrate programmatic risk interfaces directly into onboarding flows for digital lending applications.' },
-  { icon: <LineChart size={20} />, title: 'Microfinance Institutions', desc: 'Scale rural credit deployment by leveraging mobile and utility proxies instead of manual audits.' },
+  { icon: <Landmark size={18} />, title: 'Private Banks', desc: 'Securely originate credit for the emerging affluent without traditional documentation.' },
+  { icon: <Building2 size={18} />, title: 'NBFC Operations', desc: 'Deploy alternative parameter sets to underwrite micro-entrepreneurs effectively.' },
+  { icon: <Briefcase size={18} />, title: 'Fintech Sponsors', desc: 'Integrate programmatic risk interfaces directly into onboarding sequences.' },
+  { icon: <LineChart size={18} />, title: 'Microfinance (MFI)', desc: 'Scale rural credit deployment natively via mobile and digital proxy evaluations.' },
 ];
 
 export default function LandingPage() {
   const navigate = useNavigate();
+  const heroRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const signalsRef = useRef<HTMLDivElement>(null);
   const featuresRef = useRef<HTMLDivElement>(null);
-  const stepsRef = useRef<HTMLDivElement>(null);
+  const usersRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero Entrances
-      gsap.from('.hero-elem', { y: 40, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.15, delay: 0.2 });
-      
-      // Stats count up
-      if (statsRef.current) {
-        gsap.from('.stat-item', {
-          scrollTrigger: { trigger: statsRef.current, start: 'top 85%' },
-          y: 20, opacity: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out',
+      // Hero Entrance
+      if (heroRef.current) {
+        gsap.from(heroRef.current.querySelectorAll('.h-anim'), {
+          y: 20, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power2.out', delay: 0.1
         });
+      }
+
+      // Stats Counting
+      if (statsRef.current) {
+        gsap.from(statsRef.current.querySelectorAll('.stat-item'), {
+          scrollTrigger: { trigger: statsRef.current, start: 'top 85%' },
+          y: 20, opacity: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out',
+        });
+
         statsRef.current.querySelectorAll('.stat-number').forEach((counter) => {
-          const target = parseInt(counter.getAttribute('data-target') || '0');
+          const targetStr = counter.getAttribute('data-target') || '0';
+          const target = parseInt(targetStr.replace(/[^0-9]/g, ''), 10);
           if (target > 0) {
-            gsap.fromTo(counter, { innerText: '0' }, {
-              innerText: target, duration: 2, ease: 'power2.out', snap: { innerText: 1 },
-              scrollTrigger: { trigger: statsRef.current, start: 'top 85%' },
-            });
+            gsap.fromTo(counter,
+              { innerText: '0' },
+              {
+                innerText: target.toString(),
+                duration: 2,
+                ease: 'power2.out',
+                snap: { innerText: 1 },
+                scrollTrigger: { trigger: statsRef.current, start: 'top 85%' },
+              }
+            );
           }
         });
       }
 
-      // Card Sections
+      // Card Staggers
       const animateSections = [
-        { ref: signalsRef, selector: '.signal-card', y: 30 },
-        { ref: featuresRef, selector: '.feature-card', y: 30 },
-        { ref: stepsRef, selector: '.step-item', y: 30 },
+        { ref: signalsRef, selector: '.signal-card', title: '.section-title' },
+        { ref: featuresRef, selector: '.feature-card', title: '.section-title' },
+        { ref: usersRef, selector: '.user-card', title: '.section-title' },
       ];
-      animateSections.forEach(({ ref, selector, y }) => {
+
+      animateSections.forEach(({ ref, selector, title }) => {
         if (ref.current) {
-          gsap.from(selector, {
+          gsap.from(ref.current.querySelector(title), {
+            scrollTrigger: { trigger: ref.current, start: 'top 85%' },
+            y: 20, opacity: 0, duration: 0.8, ease: 'power2.out',
+          });
+          gsap.from(ref.current.querySelectorAll(selector), {
             scrollTrigger: { trigger: ref.current, start: 'top 80%' },
-            y, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out',
+            y: 20, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out',
           });
         }
       });
@@ -144,185 +146,107 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="grid-bg">
+    <div style={{ background: 'var(--surface)' }}>
       <Navbar />
 
-      {/* ─── Architectural Hero ─── */}
-      <section style={{ padding: 'clamp(140px, 15vh, 200px) var(--page-pad) 100px', borderBottom: '1px solid var(--rule)' }}>
-        <div className="offset-grid">
-          <div className="offset-label hero-elem">
-            <div className="formal-label" style={{ borderBottom: '1.5px solid var(--accent)', paddingBottom: '8px', display: 'inline-block', marginBottom: 'var(--space-5)' }}>
-              Institutional Analytics
-            </div>
-            <p style={{ fontSize: 'var(--type-sm)', color: 'var(--muted)', maxWidth: '200px', lineHeight: 1.6 }}>
-              Calibrated algorithmic assessment engineering specifically for the unbanked and underserved.
-            </p>
+      {/* ─── Hero Banner (Classic Corporate Blue) ─── */}
+      <div ref={heroRef} style={{ background: 'linear-gradient(180deg, var(--accent) 0%, #001A33 100%)', color: '#FFFFFF', padding: '120px var(--page-pad) 60px', borderBottom: '4px solid var(--highlight)' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+          <div className="h-anim" style={{ fontSize: '13px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--highlight)', marginBottom: '16px' }}>
+            Enterprise Risk Assessment Engine
           </div>
-          
-          <div className="offset-content hero-elem">
-            <h1 className="formal-display" style={{ fontSize: 'clamp(var(--type-3xl), 6vw, 6rem)', lineHeight: 1.05, color: 'var(--ink)', marginBottom: 'var(--space-6)' }}>
-              Assessing the <br/> Credit-Invisible.<br/>
-              <span style={{ color: 'var(--accent)' }}>Powering Trusted Capital.</span>
-            </h1>
-            <p style={{ maxWidth: '640px', fontSize: 'var(--type-md)', lineHeight: 1.7, color: 'var(--muted)', marginBottom: 'var(--space-7)' }}>
-              CreditLens deploys high-fidelity behavioral telemetry to underwrite the 650 million individuals lacking traditional bureau footprints securely and objectively.
-            </p>
-            <div style={{ display: 'flex', gap: 'var(--space-4)', alignItems: 'center' }}>
-              <button className="formal-btn-primary" onClick={() => navigate('/dashboard')}>
-                Initiate Underwriting Portal <ArrowRight size={14} />
-              </button>
-            </div>
+          <h1 className="formal-display h-anim" style={{ fontSize: '48px', margin: '0 0 24px 0', lineHeight: 1.1, textShadow: '0 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>
+            Expanding Access to Capital.<br />
+            Securing Institutional Trust.
+          </h1>
+          <p className="h-anim" style={{ fontFamily: 'var(--font-ui)', fontSize: '18px', lineHeight: 1.5, color: '#CCD6E0', maxWidth: '700px', margin: '0 0 40px 0' }}>
+            CreditLens deploys advanced behavioral telemetry to empower financial institutions to underwrite the 650 million credit-invisible adults securely, objectively, and rapidly.
+          </p>
+          <div className="h-anim">
+            <button className="formal-btn-primary" onClick={() => navigate('/dashboard')} style={{ fontSize: '14px', padding: '12px 32px' }}>
+              Launch Underwriting Terminal
+            </button>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* ─── Metrics Ledger ─── */}
-      <section ref={statsRef} style={{ background: 'var(--surface)' }}>
-        <div className="offset-grid" style={{ padding: 'var(--space-8) 0' }}>
-          {stats.map((stat, i) => (
-            <div key={i} className="stat-item" style={{ gridColumn: 'span 3', borderLeft: i === 0 ? 'none' : '1px solid var(--rule)', paddingLeft: i === 0 ? '0' : 'var(--space-5)' }}>
-              <div className="formal-label" style={{ marginBottom: '12px' }}>{stat.label}</div>
-              <div className="formal-display tabular-nums" style={{ fontSize: 'var(--type-3xl)', color: 'var(--ink)', lineHeight: 1 }}>
-                <span className="stat-number" data-target={stat.value}>0</span><span style={{ fontSize: '0.6em', marginLeft: '4px', color: 'var(--accent)' }}>{stat.suffix}</span>
+      {/* ─── Metrics Strip ─── */}
+      <div ref={statsRef} style={{ background: '#FFFFFF', borderBottom: '1px solid var(--rule)' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto', display: 'flex', borderLeft: '1px solid var(--rule)', borderRight: '1px solid var(--rule)' }}>
+          {stats.map((s, i) => (
+            <div key={i} className="stat-item" style={{ flex: 1, padding: '24px', borderRight: i < stats.length - 1 ? '1px solid var(--rule)' : 'none', textAlign: 'center' }}>
+              <div style={{ fontSize: '28px', fontWeight: 'bold', color: 'var(--accent)', fontFamily: 'var(--font-ui)', marginBottom: '4px' }}>
+                <span className="stat-number tabular-nums" data-target={s.value}>0</span>
+                <span>{s.suffix}</span>
               </div>
+              <div style={{ fontSize: '11px', color: 'var(--muted)', textTransform: 'uppercase', fontWeight: 'bold' }}>{s.label}</div>
             </div>
           ))}
         </div>
-      </section>
+      </div>
 
-      <hr className="rule-line" />
+      <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '60px 0', display: 'flex', flexDirection: 'column', gap: '60px' }}>
 
-      {/* ─── Telemetry Vectors (What We Analyze) ─── */}
-      <section ref={signalsRef} style={{ padding: 'var(--space-10) var(--page-pad)' }}>
-        <div className="offset-grid">
-          <div className="offset-label">
-            <div className="formal-label" style={{ marginBottom: 'var(--space-4)', display: 'inline-block', borderBottom: '1px solid var(--ink)', paddingBottom: '4px', color: 'var(--ink)' }}>
-              Vector Analysis
-            </div>
-            <h2 className="formal-display" style={{ fontSize: 'var(--type-xl)', marginBottom: 'var(--space-6)', color: 'var(--ink)', maxWidth: '280px' }}>
-              Core Behavioral Telemetry Pipelines
-            </h2>
-            <p style={{ fontSize: 'var(--type-sm)', color: 'var(--muted)', maxWidth: '280px', lineHeight: 1.7, marginBottom: 'var(--space-6)' }}>
-              Replacing conventional credit histories with four distinct categories of digital footprint tracing to model empirical fiscal discipline securely.
-            </p>
-          </div>
-
-          <div className="offset-content">
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--space-4)' }}>
-              {signals.map((sig, i) => (
-                <div key={i} className="signal-card formal-card" style={{ padding: 'var(--space-6)', minHeight: '220px', display: 'flex', flexDirection: 'column' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 'var(--space-4)' }}>
-                    <div style={{ color: 'var(--accent)' }}>{sig.icon}</div>
-                    <span className="formal-label" style={{ fontSize: '9px' }}>{sig.metric}</span>
-                  </div>
-                  <div>
-                    <h3 style={{ fontSize: 'var(--type-base)', fontWeight: 600, color: 'var(--ink)', marginBottom: 'var(--space-2)' }}>{sig.title}</h3>
-                    <p style={{ fontSize: 'var(--type-sm)', color: 'var(--muted)', lineHeight: 1.7 }}>{sig.desc}</p>
-                  </div>
+        {/* ─── Telemetry Vectors ─── */}
+        <div ref={signalsRef}>
+          <h2 className="formal-display section-title" style={{ fontSize: '28px', color: 'var(--accent)', borderBottom: '2px solid var(--accent)', paddingBottom: '8px', marginBottom: '24px' }}>
+            Behavioral Telemetry Pipelines
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+            {signals.map((sig, i) => (
+              <div key={i} className="formal-card signal-card" style={{ padding: '20px', display: 'flex', gap: '16px' }}>
+                <div style={{ color: 'var(--accent)', marginTop: '2px' }}>{sig.icon}</div>
+                <div>
+                  <h3 style={{ fontSize: '14px', fontWeight: 'bold', color: 'var(--ink)', margin: '0 0 8px 0' }}>{sig.title}</h3>
+                  <p style={{ fontSize: '13px', color: 'var(--muted)', margin: 0, lineHeight: 1.5 }}>{sig.desc}</p>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
-      </section>
 
-      <hr className="rule-line" />
-
-      {/* ─── Processing Sequence ─── */}
-      <section ref={stepsRef} style={{ padding: 'var(--space-10) var(--page-pad)', background: 'var(--surface-2)' }}>
-        <div className="offset-grid">
-          <div className="offset-label">
-            <div className="formal-label" style={{ marginBottom: 'var(--space-4)', display: 'inline-block', borderBottom: '1px solid var(--ink)', paddingBottom: '4px', color: 'var(--ink)' }}>
-              Operational Hierarchy
-            </div>
-            <h2 className="formal-display" style={{ fontSize: 'var(--type-xl)', color: 'var(--ink)' }}>
-              Evaluation Sequence
-            </h2>
-          </div>
-
-          <div className="offset-content">
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--space-6)' }}>
-              {steps.map((step, i) => (
-                <div key={i} className="step-item" style={{ borderLeft: '1px solid var(--accent)', paddingLeft: 'var(--space-4)' }}>
-                  <div className="formal-display" style={{ fontSize: 'var(--type-xl)', color: 'var(--accent)', marginBottom: 'var(--space-3)' }}>
-                    {step.num}
-                  </div>
-                  <h3 style={{ fontSize: 'var(--type-sm)', fontWeight: 600, marginBottom: 'var(--space-2)', color: 'var(--ink)' }}>{step.title}</h3>
-                  <p style={{ fontSize: 'var(--type-xs)', color: 'var(--muted)', lineHeight: 1.6 }}>{step.desc}</p>
+        {/* ─── Architecture & Compliance ─── */}
+        <div ref={featuresRef}>
+          <h2 className="formal-display section-title" style={{ fontSize: '28px', color: 'var(--accent)', borderBottom: '2px solid var(--accent)', paddingBottom: '8px', marginBottom: '24px' }}>
+            Institutional Infrastructure
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+            {features.map((feat, i) => (
+              <div key={i} className="formal-card feature-card" style={{ padding: '20px', display: 'flex', gap: '16px' }}>
+                <div style={{ color: 'var(--accent)', marginTop: '2px' }}>{feat.icon}</div>
+                <div>
+                  <h3 style={{ fontSize: '14px', fontWeight: 'bold', color: 'var(--ink)', margin: '0 0 8px 0' }}>{feat.title}</h3>
+                  <p style={{ fontSize: '13px', color: 'var(--muted)', margin: 0, lineHeight: 1.5 }}>{feat.desc}</p>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
-      </section>
 
-      <hr className="rule-line" />
-
-      {/* ─── Trust Architecture ─── */}
-      <section ref={featuresRef} style={{ padding: 'var(--space-10) var(--page-pad)' }}>
-        <div className="offset-grid">
-          <div className="offset-label">
-            <div className="formal-label" style={{ marginBottom: 'var(--space-4)', display: 'inline-block', borderBottom: '1px solid var(--ink)', paddingBottom: '4px', color: 'var(--ink)' }}>
-              Platform Integrity
-            </div>
-            <h2 className="formal-display" style={{ fontSize: 'var(--type-xl)', color: 'var(--ink)', marginBottom: 'var(--space-4)', maxWidth: '280px' }}>
-              Institutional Compliance Formulations
-            </h2>
-          </div>
-
-          <div className="offset-content">
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0' }}>
-              {features.map((feat, i) => (
-                <div key={i} className="feature-card interactive" style={{ padding: 'var(--space-6) 0', borderBottom: '1px solid var(--rule)', display: 'flex', gap: 'var(--space-6)', alignItems: 'flex-start' }}>
-                  <div style={{ color: 'var(--accent)', flexShrink: 0, marginTop: '4px' }}>{feat.icon}</div>
-                  <div style={{ flex: 1, display: 'flex', gap: 'var(--space-4)', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                    <div style={{ maxWidth: '400px' }}>
-                      <h3 style={{ fontSize: 'var(--type-base)', fontWeight: 600, color: 'var(--ink)', marginBottom: 'var(--space-2)' }}>{feat.title}</h3>
-                      <p style={{ fontSize: 'var(--type-sm)', color: 'var(--muted)', lineHeight: 1.7 }}>{feat.desc}</p>
-                    </div>
-                    <span className="formal-label" style={{ fontSize: '9px', textAlign: 'right', minWidth: '120px' }}>{feat.badge}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+        {/* ─── Client Types ─── */}
+        <div ref={usersRef}>
+          <h2 className="formal-display section-title" style={{ fontSize: '28px', color: 'var(--accent)', borderBottom: '2px solid var(--accent)', paddingBottom: '8px', marginBottom: '24px' }}>
+            Enterprise Deployment Profiles
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+            {targetUsers.map((user, i) => (
+              <div key={i} className="formal-card user-card" style={{ padding: '16px', background: '#FFFFFF' }}>
+                <div style={{ color: 'var(--accent)', marginBottom: '12px' }}>{user.icon}</div>
+                <h3 style={{ fontSize: '13px', fontWeight: 'bold', color: 'var(--ink)', margin: '0 0 8px 0' }}>{user.title}</h3>
+                <p style={{ fontSize: '12px', color: 'var(--muted)', margin: 0, lineHeight: 1.4 }}>{user.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </section>
 
-      <hr className="rule-line" />
+      </div>
 
-      {/* ─── Client Base ─── */}
-      <section style={{ padding: 'var(--space-10) var(--page-pad)' }}>
-        <div className="offset-grid">
-          <div className="offset-label">
-            <div className="formal-label" style={{ marginBottom: 'var(--space-4)', display: 'inline-block', borderBottom: '1px solid var(--ink)', paddingBottom: '4px', color: 'var(--ink)' }}>
-              Strategic Partners
-            </div>
-            <h2 className="formal-display" style={{ fontSize: 'var(--type-xl)', color: 'var(--ink)' }}>
-              Designed For The Enterprise
-            </h2>
-          </div>
-          
-          <div className="offset-content">
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--space-4)' }}>
-              {targetUsers.map((user, i) => (
-                <div key={i} className="formal-card interactive" style={{ padding: 'var(--space-5)', display: 'flex', gap: 'var(--space-4)', alignItems: 'center' }}>
-                  <div style={{ color: 'var(--accent)' }}>{user.icon}</div>
-                  <div>
-                    <h3 style={{ fontSize: 'var(--type-sm)', fontWeight: 600, color: 'var(--ink)', marginBottom: '4px' }}>{user.title}</h3>
-                    <p style={{ fontSize: 'var(--type-xs)', color: 'var(--muted)', lineHeight: 1.5 }}>{user.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+      {/* ─── Corporate Footer ─── */}
+      <footer style={{ background: 'var(--accent)', color: '#FFFFFF', padding: '32px var(--page-pad)', borderTop: '4px solid var(--highlight)' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '11px', textTransform: 'uppercase', fontWeight: 'bold', letterSpacing: '1px' }}>
+          <span>© {new Date().getFullYear()} CreditLens Analytics</span>
+          <span style={{ color: '#A0BBE0' }}>Confidential Risk Infrastructure System</span>
         </div>
-      </section>
-
-      {/* ─── Footer ─── */}
-      <footer style={{ padding: 'var(--space-5) var(--page-pad)', borderTop: '1px solid var(--rule)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--surface)' }}>
-        <span className="formal-label" style={{ fontSize: '10px' }}>© {new Date().getFullYear()} CreditLens Analytics — Trust Platform</span>
-        <span className="formal-label" style={{ fontSize: '10px' }}>Federated Risk Infrastructure</span>
       </footer>
     </div>
   );

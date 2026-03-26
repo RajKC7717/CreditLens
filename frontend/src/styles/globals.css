@@ -1,64 +1,69 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Sora:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Arimo:wght@400;600&display=swap');
 @import "tailwindcss";
 
 :root {
-  /* Central Bank — Formal White */
-  --foundation:  #FFFFFF;
-  --surface:     #F6F6F4;
-  --surface-2:   #EDEDE9;
-  --ink:         #1C1C1C;
-  --muted:       #6B6B6B;
-  --accent:      #1A3A5C;   /* Institutional navy */
-  --rule:        rgba(0,0,0,0.10);
-  --accent-muted:#1A3A5C12;
+  /* Corporate Banking — Legacy Blue */
+  --foundation: #FFFFFF;
+  --surface: #F4F7FA;
+  --surface-2: #E8EDF2;
+  --ink: #000000;
+  --muted: #4A5A6A;
+  --accent: #003366;
+  /* Classic Navy */
+  --accent-light: #004C99;
+  /* Lighter Navy */
+  --rule: #B0C4DE;
+  /* LightSteelBlue */
+  --highlight: #FFC000;
+  /* Institutional Gold */
 
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-ui:      'Sora', sans-serif;
+  /* Legacy Typography */
+  --font-display: 'Georgia', 'Times New Roman', serif;
+  --font-ui: 'Arial', 'Helvetica', sans-serif;
 
-  /* Type Scale (Modular 1.25) */
-  --type-xs:   0.694rem;
-  --type-sm:   0.833rem;
+  /* Type Scale */
+  --type-xs: 0.694rem;
+  --type-sm: 0.833rem;
   --type-base: 1rem;
-  --type-md:   1.25rem;
-  --type-lg:   1.563rem;
-  --type-xl:   1.953rem;
-  --type-2xl:  2.441rem;
-  --type-3xl:  3.052rem;
+  --type-md: 1.25rem;
+  --type-lg: 1.563rem;
+  --type-xl: 1.953rem;
+  --type-2xl: 2.441rem;
+  --type-3xl: 3.052rem;
 
-  /* Spacing Scale (8-point grid) */
-  --space-1:   4px;
-  --space-2:   8px;
-  --space-3:   12px;
-  --space-4:   16px;
-  --space-5:   24px;
-  --space-6:   32px;
-  --space-7:   48px;
-  --space-8:   64px;
-  --space-9:   96px;
-  --space-10:  128px;
-  
-  --radius-card: 2px; /* Extremely minimal radius - highest formality */
-  --ease-formal: cubic-bezier(0.22, 1, 0.36, 1);
-  
+  /* Tight Spacing Scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  --radius-card: 0px;
+  /* Absolute rigidity */
+
   /* Layout Grid Variables */
   --grid-cols: 12;
-  --gutter:    32px;
-  --max-width: 1440px;
-  --page-pad:  clamp(24px, 5vw, 64px);
+  --gutter: 20px;
+  --max-width: 1280px;
+  --page-pad: clamp(16px, 4vw, 40px);
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 body {
-  background: var(--foundation);
+  background: var(--surface);
   color: var(--ink);
   font-family: var(--font-ui);
   font-size: var(--type-base);
-  line-height: 1.65;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
 }
@@ -68,72 +73,81 @@ body {
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--foundation); }
-::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 0; }
-::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-2);
+  border-left: 1px solid var(--rule);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+}
 
 /* Typography Formatting */
 .formal-display {
   font-family: var(--font-display);
-  letter-spacing: -0.02em;
+  color: var(--accent);
 }
 
 .formal-label {
+  font-family: var(--font-ui);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
   font-size: var(--type-xs);
+  font-weight: bold;
   color: var(--muted);
+  letter-spacing: 0.05em;
 }
 
 .tabular-nums {
   font-variant-numeric: tabular-nums;
+  font-family: var(--font-ui);
 }
 
 /* Formal Utility Classes */
 .formal-card {
-  background: var(--surface);
+  background: var(--foundation);
   border: 1px solid var(--rule);
   border-radius: var(--radius-card);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+  /* very light classic shadow */
 }
 
-.formal-card.interactive:hover {
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-  border-color: rgba(26, 58, 92, 0.3); /* navy faint */
-}
-
-/* Form Inputs */
-input, select, textarea {
-  border: none;
-  border-bottom: 1.5px solid var(--rule);
+/* Form Inputs - Old School Fields */
+input,
+select,
+textarea {
+  border: 1px solid var(--rule);
   border-radius: 0;
-  background: transparent;
+  background: #FFFFFF;
   color: var(--ink);
-  padding: var(--space-2) 0;
+  padding: var(--space-1) var(--space-2);
   font-family: inherit;
-  font-size: var(--type-base);
-  transition: border-color 0.2s;
-  outline: none;
-}
-
-input:focus, select:focus, textarea:focus {
-  border-bottom-color: var(--accent);
-}
-
-/* Buttons */
-.formal-btn-primary {
-  background: var(--accent);
-  color: var(--foundation);
-  padding: 10px 24px;
   font-size: var(--type-sm);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border-radius: 2px;
-  border: 1.5px solid var(--accent);
+  outline: none;
+  width: 100%;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent) inset;
+}
+
+/* Legacy Buttons - Heavy Blue Gradients */
+.formal-btn-primary {
+  background: linear-gradient(180deg, var(--accent-light) 0%, var(--accent) 100%);
+  color: #FFFFFF;
+  padding: 8px 16px;
+  font-size: var(--type-sm);
+  font-weight: bold;
+  border: 1px solid #001A33;
   cursor: pointer;
-  transition: all 0.2s var(--ease-formal);
   font-family: var(--font-ui);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -141,26 +155,30 @@ input:focus, select:focus, textarea:focus {
 }
 
 .formal-btn-primary:hover:not(:disabled) {
-  background: transparent;
-  color: var(--accent);
+  background: linear-gradient(180deg, var(--accent) 0%, #001A33 100%);
+}
+
+.formal-btn-primary:active:not(:disabled) {
+  background: #001A33;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .formal-btn-primary:disabled {
-  opacity: 0.5;
+  background: #A0B0C0;
+  border-color: #8090A0;
+  color: #E0E0E0;
+  text-shadow: none;
   cursor: not-allowed;
 }
 
 .formal-btn-ghost {
-  background: transparent;
+  background: #E8EDF2;
   color: var(--accent);
-  padding: 10px 24px;
+  padding: 8px 16px;
   font-size: var(--type-sm);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border-radius: 2px;
-  border: 1.5px solid var(--accent);
+  font-weight: bold;
+  border: 1px solid var(--rule);
   cursor: pointer;
-  transition: all 0.2s var(--ease-formal);
   font-family: var(--font-ui);
   display: inline-flex;
   align-items: center;
@@ -169,8 +187,8 @@ input:focus, select:focus, textarea:focus {
 }
 
 .formal-btn-ghost:hover {
-  background: var(--accent);
-  color: var(--foundation);
+  background: #D0D8E0;
+  border-color: #A0B0C0;
 }
 
 /* Data Tables */
@@ -179,37 +197,35 @@ input:focus, select:focus, textarea:focus {
   border-collapse: collapse;
   font-variant-numeric: tabular-nums;
   font-size: var(--type-sm);
+  border: 1px solid var(--rule);
+  background: var(--foundation);
 }
+
 .formal-table th {
-  text-transform: uppercase;
-  letter-spacing: 0.10em;
-  font-size: var(--type-xs);
-  color: var(--muted);
-  border-bottom: 1.5px solid var(--rule);
-  padding: var(--space-3) var(--space-4);
+  background: linear-gradient(180deg, #F4F7FA 0%, #E8EDF2 100%);
+  color: var(--accent);
+  border: 1px solid var(--rule);
+  padding: var(--space-2) var(--space-3);
   text-align: left;
+  font-weight: bold;
+  font-size: var(--type-xs);
+  text-transform: uppercase;
 }
-.formal-table th.numeric, .formal-table td.numeric { 
-  text-align: right; 
-}
-.formal-table tr:nth-child(even) { 
-  background: var(--surface-2); 
-}
+
 .formal-table td {
-  padding: var(--space-3) var(--space-4);
-  border-bottom: 1px solid var(--rule);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--rule);
   color: var(--ink);
+}
+
+.formal-table tr:nth-child(even) td {
+  background: #F8FBFC;
 }
 
 /* Layout Utilities */
 .rule-line {
   border: none;
   border-top: 1px solid var(--rule);
-}
-.rule-vertical {
-  width: 1px;
-  background: var(--rule);
-  height: 100%;
 }
 
 /* Structural Offset Grid */
@@ -220,42 +236,46 @@ input:focus, select:focus, textarea:focus {
   max-width: var(--max-width);
   margin: 0 auto;
 }
+
 .offset-label {
   grid-column: span 3;
 }
+
 .offset-content {
   grid-column: span 9;
 }
+
 @media (max-width: 900px) {
-  .offset-label, .offset-content {
+
+  .offset-label,
+  .offset-content {
     grid-column: span 12;
   }
 }
 
-/* Motion */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+/* Strip GSAP Conflicting Opacity */
+.r-anim {
+  opacity: 1 !important;
+  /* Force visible */
+  transform: none !important;
 }
 
-.reveal { animation: fadeUp 0.6s var(--ease-formal) both; }
-.reveal-delay-1 { animation-delay: 0.1s; }
-.reveal-delay-2 { animation-delay: 0.2s; }
-.reveal-delay-3 { animation-delay: 0.3s; }
-.reveal-delay-4 { animation-delay: 0.4s; }
+/* Old School Header Strip */
+.bank-header-strip {
+  background: var(--accent);
+  color: #FFF;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-display);
+  border-bottom: 2px solid var(--highlight);
+}
 
-/* Remove number arrows */
+/* Remove numeric arrows */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-input[type="number"] { -moz-appearance: textfield; }
 
-/* Grid Background */
-.grid-bg {
-  background-image: 
-    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
-  background-size: 64px 64px;
+input[type="number"] {
+  -moz-appearance: textfield;
 }

@@ -3,9 +3,9 @@ import numpy as np
 import pandas as pd
 
 # Load model and scaler once when file is imported
-with open('models/risk_model.pkl', 'rb') as f:
+with open('../models/risk_model.pkl', 'rb') as f:
     model = pickle.load(f)
-with open('models/scaler.pkl', 'rb') as f:
+with open('../models/scaler.pkl', 'rb') as f:
     scaler = pickle.load(f)
 
 FEATURE_COLS = [

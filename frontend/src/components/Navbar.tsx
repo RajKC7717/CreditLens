@@ -1,4 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
+
 export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -12,27 +13,26 @@ export default function Navbar() {
         left: 0,
         right: 0,
         zIndex: 100,
-        padding: '0 var(--space-7)',
-        height: '68px',
+        padding: '0 var(--page-pad)',
+        height: '60px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        background: 'rgba(255, 255, 255, 0.95)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        borderBottom: '1px solid var(--rule)',
+        background: 'var(--accent)',
+        borderBottom: '4px solid var(--highlight)', /* Institutional Gold strip */
+        boxShadow: '0 2px 4px rgba(0,0,0,0.3)',
       }}
     >
       <div
         style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }}
         onClick={() => navigate('/')}
       >
-        <span className="formal-display" style={{ fontSize: 'var(--type-xl)', fontWeight: 600, color: 'var(--ink)' }}>
+        <span className="formal-display" style={{ fontSize: 'var(--type-xl)', fontWeight: 'normal', color: '#FFFFFF', letterSpacing: '1px' }}>
           CreditLens
         </span>
         {isDashboard && (
-          <span className="formal-label" style={{ marginLeft: '12px', paddingLeft: '12px', borderLeft: '1px solid var(--rule)', marginTop: '4px' }}>
-            Underwriting Portal
+          <span style={{ marginLeft: '12px', paddingLeft: '12px', borderLeft: '1px solid #4D7399', fontSize: '12px', color: '#A0BBE0', fontFamily: 'var(--font-ui)', fontWeight: 'bold', textTransform: 'uppercase' }}>
+            Corporate Underwriting
           </span>
         )}
       </div>
@@ -40,19 +40,37 @@ export default function Navbar() {
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         {isDashboard ? (
           <button
-            className="formal-btn-ghost"
             onClick={() => navigate('/')}
-            style={{ padding: '7px 20px', fontSize: '11px' }}
+            style={{
+              padding: '6px 14px',
+              fontSize: '11px',
+              fontFamily: 'var(--font-ui)',
+              fontWeight: 'bold',
+              textTransform: 'uppercase',
+              color: 'var(--accent)',
+              background: '#FFFFFF',
+              border: '1px solid #A0BBE0',
+              cursor: 'pointer'
+            }}
           >
-            Institutional Home
+            Terminal Output &gt;
           </button>
         ) : (
           <button
-            className="formal-btn-ghost"
             onClick={() => navigate('/dashboard')}
-            style={{ padding: '7px 20px', fontSize: '11px' }}
+            style={{
+              padding: '6px 14px',
+              fontSize: '11px',
+              fontFamily: 'var(--font-ui)',
+              fontWeight: 'bold',
+              textTransform: 'uppercase',
+              color: 'var(--accent)',
+              background: '#FFFFFF',
+              border: '1px solid #A0BBE0',
+              cursor: 'pointer'
+            }}
           >
-            Launch Portal
+            Access Portal &gt;
           </button>
         )}
       </div>
